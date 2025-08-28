@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./assets/css/platzi.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Estonia&family=Federant&family=Girassol&family=Redressed&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <title>MOKEPON 1</title>
+        
+    </head>
+    <body>
+        
+        <!--SECCIÓN SELECCIONAR MASCOTA-->
+        <section id="seleccionar_mascota">
+            <h1 class="titulo_juego">Mokepón 1 🌱💧🔥</h1>
+            <h2 class="subtitulo">Elige tu mascota:</h2>
+            <div class="tarjetas">
+                <!--HIPODOGUE-->
+                <label  class="card_mascota"for="hipodogue">Hipodogue
+                    <img src="./assets/img/hipodogue.png" alt="" >
+                </label>
+                <input type="radio" name="mascota" id="hipodogue">
+                
+                <!--CAPIPEPO-->
+                <label class="card_mascota" for="capipepo">Capipepo
+                    <img src="./assets/img/capipepo.png" alt="" >
+                </label>
+                <input type="radio" name="mascota" id="capipepo">
+                
+                <!--RATIGÜEYA-->
+                <label class="card_mascota" for="ratigüeya">Ratigüeya
+                    <img src="./assets/img/ratigüeya.png" alt="" >
+                </label>
+                <input type="radio" name="mascota" id="ratigüeya">   
+                
+            </div>
+            <button id="boton_mascota">Seleccionar</button>
+        </section>   
+        
+        <!--SECCIÓN SELECCIONAR ATAQUE-->
+        <section id="seleccionar_ataque">
+            <h1 class="titulo_juego">Mokepón 1 🌱💧🔥</h1>
+            <h2 class="subtitulo">CONTRINCANTES</h2>
+            <!--SELECCIONA TU ATAQUE-->
+            
+            <!--INFORMACIÓN VIDAS JUGADOR Y JUGADOR ENEMIGO-->
+            <!-- <div id="info_jugadores">
+                <p id="jugador">Elegiste : <span id="spanMascotaJugador"> "</span></p>
+                <p id="enemigo">Tu enemigo : <span id="spanMascotaEnemigo"> </span></p>
+                <p>AMBOS COMIENZAN CON 3 VIDAS</p>
+                <p>AQUEL QUE TERMINE PRIMERO CON LAS VIDAS DEL OPONENTE GANA</p>
+            </div> -->
+            
+            <!--botones de ataque-->
+            <h2 class="subtitulo">INICIA LA BATALLA. SELECCIONA TU ATAQUE:</h2>
+            <p id="botones_ataque" class="botones__ataque">
+                <button id="boton_tierra" class="btn-ataque">Tierra 🌱</button>
+                <button id="boton_agua" class="btn-ataque">Agua 💧</button>
+                <button id="boton_fuego" class="btn-ataque">Fuego 🔥</button>
+            </p>
+            
+            <!--SECCIÓN MENSAJE FINAL-->
+        <section id="seccion_mensaje_final" >
+            <!--RESULTADO DE TODAS LAS BATALLA-->
+        </section>
+        
+        <!--BOTÓN REINICIAR-->
+        <section id="seccion_reiniciar">
+            <button id="boton_reiniciar">Reiniciar</button>
+        </section>
+            
+            <section id="seccion_mensajes">
+                <!--SECCIÓN MENSAJES DE COMBATE-->
+                <div id="jugador">
+                    <h4 id="spanMascotaJugador"></h4>
+                    <h4 id="total_vidas_jugador">  VIDA</h4>
+                    <h4 id="ataque_jugador"></h4>
+                </div>
+                <div>               
+                    <p id="resultado_combate">resultado combate</p>
+                </div>                           
+                <div id="enemigo">
+                    <h4 id="spanMascotaEnemigo"></h4>
+                    <h4 id="total_vidas_enemigo">  VIDA</h4>    
+                    <h4 id="ataque_enemigo"></h4>         
+                </div>
+            </section>
+            
+        </section>
+
+        
+        
+        
+        <!-- 
+            <script src="./assets/js/codigojuego.js"></script>
+            -->
+        <script src="./assets/js/app.js"></script> 
+        
+    </body>
+    </html>
