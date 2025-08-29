@@ -8,6 +8,9 @@ app.use(cors())
 app.use(express.json())
 
 
+app.get("/", (req, res) => {
+    res.send("hola Paulita")
+})
 //ARRAYJUGADORES
 const jugadores = []
 
@@ -17,28 +20,30 @@ class Jugador {
     this.id = id
     }
     
-    //asignar mokepon
-    asignarMokepon(mokepon){
-        this.mokepon = mokepon
-    }
+//     //asignar mokepon
+//     asignarMokepon(mokepon){
+//         this.mokepon = mokepon
+//     }
 
-    // actualizarPosicion(x, y){
-    //     this.x = x  
-    //     this.y = y
-    // }
+//     // actualizarPosicion(x, y){
+//     //     this.x = x  
+//     //     this.y = y
+//     // }
 }
 
 //SE LE AGREGARA UN MOKEPON AL JUGADOR CUANDO SE RECIBA LA INFORMACIÓN
-class Mokepon {
-    constructor(nombre){
-        this.nombre = nombre
-        }   
-}
+// class Mokepon {
+//     constructor(nombre){
+//         this.nombre = nombre
+//         }   
+// }
+
+
 
 //SOLICITUD A LA APP, LE ASIGNAREMOS UN ID RANDOM A CADA JUGADOR
 app.get("/unirse", (req, res) => {
 
-//LE ASIGNAMOS UN ID RANDOM AL BUENO JUGADOR
+// //LE ASIGNAMOS UN ID RANDOM AL BUENO JUGADOR
     const id = `${Math.random()}` 
 
     //CREAMOS EL JUGADOR CON EL NUEVO id
@@ -51,20 +56,22 @@ app.get("/unirse", (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*")
 
     res.send(id)
+    console.log(id)
 })
 
-app.post("/mokepon/:jugadorId", (req, res) => {
-    const jugadorId = req.params.jugadorId || ""
-    const nombre = req.body.mokepon || ""
-    const mokepon = new Mokepon(nombre)
+//URL ID JUGADOR
+// app.post("/mokepon/:jugadorId", (req, res) => {
+//     const jugadorId = req.params.jugadorId || ""
+//     const nombre = req.body.mokepon || ""
+//     const mokepon = new Mokepon(nombre)
     
-    const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id)
+//     const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id)
 
-    if(jugadorIndex >= 0){
-        jugadores[jugadorIndex].asignarMokepon(mokepon)
-    } 
-    res.send()
-})
+//     if(jugadorIndex >= 0){
+//         jugadores[jugadorIndex].asignarMokepon(mokepon)
+//     } 
+//     res.send()
+// })
 
 //ENVIAR POSICION DE MOKEPON
 // app.post(`/mokepon/:jugadorId/posicion`, (req, res) => {

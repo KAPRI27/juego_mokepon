@@ -42,7 +42,7 @@ const seccionVerMapa = document.getElementById("ver_mapa")
 const mapa = document.getElementById("mapa")
 let intervalo 
 
-let jugadorId = null
+let jugadorId = ""
 let mokepones = []
 let opcionDeMokepones
 let inputHipodogue
@@ -242,7 +242,7 @@ function iniciarJuego(){
         <h4>${mokepon.nombre}</h4>
         </label>
         `
-    contenedorTarjetas.innerHTML += opcionDeMokepones
+        contenedorTarjetas.innerHTML += opcionDeMokepones
 
         inputHipodogue = document.getElementById('Hipodogue')
         inputCapipepo = document.getElementById('Capipepo')
@@ -260,19 +260,18 @@ function iniciarJuego(){
     unirseAlJuego()
 }
 
-//CONECTARSE AL SERVIDOR Y GENERAR UNA SOLICITUD
+// //CONECTARSE AL SERVIDOR Y GENERAR UNA SOLICITUD
 function unirseAlJuego(){
     fetch("http://localhost:8080/unirse")
-        console.log("conectado al servidor")
         .then(function(res){
-            console.log(res)
-            if(res.ok) {
-                res.text()
-                    .then(function (respuesta) {
-                        // console.log(respuesta
-                        jugadorId = respuesta
-                    })
-            }
+                console.log(res)
+//             if(res.ok) {
+//                 res.text()
+//                     .then(function (respuesta) {
+//                         // console.log(respuesta
+//                         jugadorId = respuesta
+//                     })
+//             }
         })
 }
 
@@ -308,16 +307,14 @@ function seleccionarMascotaJugador (){
         alert('ELIGE UNA MASCOTA')
     }
     // console.log("funcion_seleccionar_mascota_funcionando")
-    
     seleccionarMokepon(mascotaJugador)
-
     extraerAtaques(mascotaJugador)
     iniciarMapa()
 }
 
 //FUNCION SELECCIONAR MOKEPON ESTA FUNCIÓN ENVÍA EL MOKEPON SELECCIONADO AL BACKEND
 function seleccionarMokepon(mascotaJugador){
-    fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+    fetch("http://localhost:8080/mokepon/:jugadorId", {
         method: "post",
         headers: {
             "Content-Type" : "application/json"
@@ -384,7 +381,6 @@ function secuenciaAtaque(){
         seccionDetallesBatallas.style.display = "flex"
     })   
 }
-
 
 //MASCOTA DEL ENEMIGO (ALEATORIO)
 function seleccionarMascotaEnemigo(enemigo){
@@ -546,7 +542,7 @@ function pintarCanvas(){
         mascotaJugadorObjeto.alto     //alto en px
     )
     mascotaJugadorObjeto.pintarMokepon()
-    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
+    // mascotaJugadorObjeto.enviarPosicion(x, y)
 
     hipodogueEnemigo.pintarMokepon()
     capipepoEnemigo.pintarMokepon()
@@ -566,19 +562,19 @@ function pintarCanvas(){
 }
 
 //ENVIAR POSICION JUGADOR agregammos una funccion que permite leer las coordenadas del jugador
-function enviarPosicion(x, y){
-    fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`), {
-        method: "POST",
-        headers:{ 
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            x, 
-            y 
-        })
-    }
-    // console.log("funcion Enviar Posicion FUNCIONANDO")
-} 
+// function enviarPosicion(x, y){
+//     fetch(`http://localhost:8080/mokepon/${jugadorId}/posicion`), {
+//         method: "POST",
+//         headers:{ 
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             x, 
+//             y 
+//         })
+//     }
+//     // console.log("funcion Enviar Posicion FUNCIONANDO")
+// } 
 
 function moverDerecha(){
     const mascotaJugadorObjeto = obtenerObjetoMascota()
