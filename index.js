@@ -56,7 +56,7 @@ app.get("/unirse", (req, res) => {
     res.setHeader("Access-Control-Allow-Origin", "*")
 
     res.send(id)
-    console.log(id)
+    console.log("el jugadorId es : " + id)
 })
 
 //URL ID JUGADOR

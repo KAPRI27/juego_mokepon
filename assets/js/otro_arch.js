@@ -264,14 +264,13 @@ function iniciarJuego(){
 function unirseAlJuego(){
     fetch("http://localhost:8080/unirse")
         .then(function(res){
-                console.log(res)
-//             if(res.ok) {
-//                 res.text()
-//                     .then(function (respuesta) {
-//                         // console.log(respuesta
-//                         jugadorId = respuesta
-//                     })
-//             }
+            if(res.ok) {
+                res.text()
+                    .then(function (respuesta) {
+                        jugadorId = (respuesta)
+                        console.log (jugadorId + " este el el id del jugador")
+                    })
+            }
         })
 }
 
