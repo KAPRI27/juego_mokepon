@@ -32,13 +32,11 @@ class Jugador {
 }
 
 //SE LE AGREGARA UN MOKEPON AL JUGADOR CUANDO SE RECIBA LA INFORMACIÓN
-// class Mokepon {
-//     constructor(nombre){
-//         this.nombre = nombre
-//         }   
-// }
-
-
+class Mokepon {
+    constructor(nombre){
+        this.nombre = nombre
+        }   
+}
 
 //SOLICITUD A LA APP, LE ASIGNAREMOS UN ID RANDOM A CADA JUGADOR
 app.get("/unirse", (req, res) => {
@@ -53,25 +51,28 @@ app.get("/unirse", (req, res) => {
     jugadores.push(jugador)
 
     //para permitir las peticiones desde cualquier origen
-    res.setHeader("Access-Control-Allow-Origin", "*")
+    // res.setHeader("Access-Control-Allow-Origin", "*")
 
     res.send(id)
-    console.log("el jugadorId es : " + id)
+    console.log("back envía el jugadorId, es : " + id)
 })
 
 //URL ID JUGADOR
-// app.post("/mokepon/:jugadorId", (req, res) => {
-//     const jugadorId = req.params.jugadorId || ""
-//     const nombre = req.body.mokepon || ""
-//     const mokepon = new Mokepon(nombre)
+app.post("/mokepon/:jugadorId", (req, res) => {
+    const jugadorId = req.params.jugadorId || ""
+    const nombre = req.body.mokepon 
+    const mokepon = new Mokepon(nombre)
     
-//     const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id)
+    // const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id)
 
-//     if(jugadorIndex >= 0){
-//         jugadores[jugadorIndex].asignarMokepon(mokepon)
-//     } 
-//     res.send()
-// })
+    // if(jugadorIndex >= 0){
+    //     jugadores[jugadorIndex].asignarMokepon(mokepon)
+    // } 
+    // console.log(jugadores + " Backend envia jugadores")
+    console.log("Back envía el jugadorId, es = " +jugadorId)
+    console.log("Backend recibe mascota es : " + mokepon.nombre)
+    res.end()
+})
 
 //ENVIAR POSICION DE MOKEPON
 // app.post(`/mokepon/:jugadorId/posicion`, (req, res) => {

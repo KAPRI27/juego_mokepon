@@ -44,6 +44,7 @@ let intervalo
 
 let jugadorId = ""
 let mokepones = []
+// let mokepon   //esta la agregué yo por si funciona
 let opcionDeMokepones
 let inputHipodogue
 let inputCapipepo 
@@ -267,8 +268,8 @@ function unirseAlJuego(){
             if(res.ok) {
                 res.text()
                     .then(function (respuesta) {
-                        jugadorId = (respuesta)
-                        console.log (jugadorId + " este el el id del jugador")
+                        jugadorId = respuesta
+                        console.log ("Front envia jugadorId, es : " + jugadorId)
                     })
             }
         })
@@ -305,6 +306,8 @@ function seleccionarMascotaJugador (){
     } else {
         alert('ELIGE UNA MASCOTA')
     }
+
+
     // console.log("funcion_seleccionar_mascota_funcionando")
     seleccionarMokepon(mascotaJugador)
     extraerAtaques(mascotaJugador)
@@ -313,15 +316,17 @@ function seleccionarMascotaJugador (){
 
 //FUNCION SELECCIONAR MOKEPON ESTA FUNCIÓN ENVÍA EL MOKEPON SELECCIONADO AL BACKEND
 function seleccionarMokepon(mascotaJugador){
-    fetch("http://localhost:8080/mokepon/:jugadorId", {
-        method: "post",
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`, {
+        method: "POST",
         headers: {
             "Content-Type" : "application/json"
         },
         body: JSON.stringify({
             mokepon: mascotaJugador
-        })
-    })
+        }
+    )
+})
+console.log("Front envía mascota, es : " + mascotaJugador)
 }
 
 //FUNCION EXTRAER ATAQUES
