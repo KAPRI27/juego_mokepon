@@ -50,9 +50,8 @@ app.get("/unirse", (req, res) => {
   //AGREGAMOS EL JUGADOR A LA LISTA DE JUGADORES
   jugadores.push(jugador)
 
-  //ESTO ES LO QUE SE ENVÍA A FRONTEN Y TAMBN LO QUE SE RENDERIZA EN LA PAGINA WEB
+  //ESTO ES LO QUE SE ENVÍA A FRONTEND Y TAMBN LO QUE SE RENDERIZA EN LA PAGINA WEB
   res.send(id)
-  console.log("back te asigno este id = " + id) // esto lo mostrará en el servidor
 })
 
 //URL ID JUGADOR
@@ -64,12 +63,17 @@ app.post("/mokepon/:jugadorId", (req, res) => {
   //buscar al jugador con ese id, primero validamos que exista con findIndex, si existe nos regresa el nro de lista
   const jugadorIndex = jugadores.findIndex((jugador) => jugadorId === jugador.id)
 
-  //ahora verificacmos si el index es mayor que cero
+  //ahora verificamos si el index es mayor que cero
   if (jugadorIndex >= 0) {jugadores[jugadorIndex].asignarMokepon(mokepon)}
 
-  console.log(jugadores + " aqui los jugadores")
-  console.log(jugadorId + " este es tu id")
-  console.log("Elegiste a : " + mokepon.nombre)
+  //MOSTRAMOS JUGADORES
+  console.log(jugadores)
+  //MOSTRAMOS EL ID
+  // console.log(jugadorId)
+  //MOSTRAMOS LA MASCOTA ELEGIDA
+  // console.log(mokepon)
+
+  //TERMINAMOS LA PETICIÓN
   res.end()
 })
 
@@ -86,8 +90,12 @@ app.post("/mokepon/:jugadorId/posicion", (req, res) => {
   if (jugadorIndex >= 0) {
     jugadores[jugadorIndex].actualizarPosicion(x, y)
   }
-  console.log(x+ " Tu X")
-  console.log(y + " Tu Y")
+  //MOSTRAMOS COORDENADAS X
+  // console.log(x)
+  //MOSTRAMOS COORDENADAS Y
+  // console.log(y)
+
+  //TERMINAMOS PETICIÓN
   res.end()
 })
 

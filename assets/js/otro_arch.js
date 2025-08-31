@@ -274,9 +274,9 @@ function unirseAlJuego() {
       if (res.ok) {
         res.text()
           .then(function (respuesta) {
-            console.log(respuesta)
+            // console.log(respuesta)
             jugadorId = respuesta
-            console.log("Front recibió tu Id = " + jugadorId)
+            // console.log(jugadorId)
           })
       }
   })
@@ -326,12 +326,12 @@ function seleccionarMokepon(mascotaJugador) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      mokepon: mascotaJugador,
-    }),
+      mokepon: mascotaJugador
+    })
   })
-  console.log(
-    "Front sabe que elegiste a " + mascotaJugador + " y lo envía a Back"
-  )
+  // console.log(
+    // "Front sabe que elegiste a " + mascotaJugador + " y lo envía a Back"
+  // )
 }
 
 //FUNCION EXTRAER ATAQUES
