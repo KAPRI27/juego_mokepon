@@ -1,4 +1,4 @@
-//ARCHIVO CON JS AVANZADO
+//ARCHIVO CON FRONTEND JS AVANZADO
 ///** FUNCION INICIARJUEGO */
 const resultadoFinal = document.getElementById("seccion_mensaje_final")
 const botonReiniciarJuego = document.getElementById("seccion_reiniciar")
@@ -238,11 +238,7 @@ function unirseAlJuego() {
 //FUNCION seleccionarMascotaJugador
 //AL FINALIZAR LLAMA FUNCION - FETCH seleccionarMokepon
 function seleccionarMascotaJugador() {
-  //ESCONDER SECCIÓN "MASCOTAS"  MIENTRAS NO SE ELIJA LA MASCOTA
-  seccionSeleccionarMascota.style.display = "none"
-  //MOSTRAR SECCION MAPA
-  seccionVerMapa.style.display = "flex"
-
+ 
   //TEXTO DE LA MASCOTA QUE ELEGISTE
   if (inputHipodogue.checked) {
       spanMascotaJugador.innerHTML = inputHipodogue.id
@@ -264,7 +260,13 @@ function seleccionarMascotaJugador() {
       mascotaJugador = inputPandarol.id
     } else {
       alert("SELECCIONA UNA MASCOTA")
+      return
   }
+   //ESCONDER SECCIÓN "MASCOTAS"  MIENTRAS NO SE ELIJA LA MASCOTA
+  seccionSeleccionarMascota.style.display = "none"
+  //MOSTRAR SECCION MAPA
+  seccionVerMapa.style.display = "flex"
+
   seleccionarMokepon(mascotaJugador)
   extraerAtaques(mascotaJugador)
   iniciarMapa()

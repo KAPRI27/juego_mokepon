@@ -5,6 +5,7 @@ const cors = require("cors")
 //CREAMOS LA APLICACIÓN CON EXPRESS
 const app = express()
 
+// app.use(express.static("static"))
 app.use(cors())
 app.use(express.json())
 
