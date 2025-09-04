@@ -328,9 +328,12 @@ function secuenciaAtaque() {
         boton.style.background = "#112f58"
         boton.disabled = true
       }
-      enviarAtaques()
+
+      if(ataqueJugador.length === 5){
+        enviarAtaques()
+      }
     })
-    seccionDetallesBatallas.style.display = "flex"  //********************* */
+    seccionDetallesBatallas.style.display = "flex"
   })
 }
 
