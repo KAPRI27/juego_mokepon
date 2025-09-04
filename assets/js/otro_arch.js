@@ -122,14 +122,6 @@ let langostarol = new Mokepon("Langostarol", "./assets/img/langostarol.png", 5, 
 let aguirrope = new Mokepon("Aguirrope", "./assets/img/aguirrope.png", 5, "./assets/img/aguirrope.png")
 let pandarol = new Mokepon("Pandarol", "./assets/img/pandarol.png", 5, "./assets/img/pandarol.png")
 
-// OBJETO MOKEPONES ENEMIGOS
-// let hipodogueEnemigo = new Mokepon("Hipodogue", "./assets/img/hipodogue.png", 5, "./assets/img/hipodogue.png")
-// let capipepoEnemigo = new Mokepon("Capipepo", "./assets/img/capipepo.png", 5, "./assets/img/capipepo.png")
-// let ratigüeyaEnemigo = new Mokepon("Ratigüeya", "./assets/img/ratigüeya.png", 5, "./assets/img/ratigüeya.png")
-// let langostarolEnemigo = new Mokepon("Langostarol", "./assets/img/langostarol.png", 5, "./assets/img/langostarol.png")
-// let aguirropeEnemigo = new Mokepon("Aguirrope", "./assets/img/aguirrope.png", 5, "./assets/img/aguirrope.png")
-// let pandarolEnemigo = new Mokepon("Pandarol", "./assets/img/pandarol.png", 5, "./assets/img/pandarol.png")
-
 // ATAQUES JUGADORES
 
 const hipodogueAtaques = [{ nombre: "AGUA 💧", id: "boton_agua" },
@@ -310,9 +302,9 @@ function mostrarAtaques(ataques) {
         `
     contenedorAtaques.innerHTML += ataquesMokepon
   })
-  botonFuego = document.getElementById("boton_fuego")
-  botonAgua = document.getElementById("boton_agua")
-  botonTierra = document.getElementById("boton_tierra")
+  // botonFuego = document.getElementById("boton_fuego")
+  // botonAgua = document.getElementById("boton_agua")
+  // botonTierra = document.getElementById("boton_tierra")
   botones = document.querySelectorAll(".BAtaque")
 }
 
@@ -336,7 +328,7 @@ function secuenciaAtaque() {
         boton.style.background = "#112f58"
         boton.disabled = true
       }
-      // ataqueAleatorioEnemigo()***************************
+      enviarAtaques()
     })
     seccionDetallesBatallas.style.display = "flex"  //********************* */
   })
@@ -347,12 +339,29 @@ function enviarAtaques(){
   fetch(`http://localhost:8080/mokepon/${jugadorId}/ataques`,{
     method: "POST",
     headers: {
-      "Content-Type" : "aplication/json"
+      "Content-Type" : "application/json"
     },
     body: JSON.stringify({
       ataques: ataqueJugador
     })
   })
+  intervalo = setInterval(obtenerAtaques, 50)
+}
+
+function obtenerAtaques (){
+  fetch(`http://localhost:8080/mokepon/${enemigoId}/ataques`)
+    .then(function (res){
+      if(res.ok){
+        res.json()
+          .then(function ({ataques}){
+            if(ataques.length === 5){
+              ataqueEnemigo = ataques
+              console.log(ataques)
+              combate()
+            }
+          })
+      }
+    })
 }
 
 //MASCOTA DEL ENEMIGO (ALEATORIO)
@@ -361,6 +370,7 @@ function seleccionarMascotaEnemigo(enemigo) {
   ataquesMokeponEnemigo = enemigo.ataques
   //LLAMANDO FUNCION SECUENCIAATAQUES
   secuenciaAtaque()
+  
 }
 
 //ATAQUES
@@ -398,6 +408,7 @@ function combate() {
   //APARECE SECCIÓN DETALLE DE LAS BATALLAS
   seccionDetallesBatallas.style.display = "flex"  //************************* */
 
+  clearInterval(intervalo)
   for (let index = 0; index < ataqueJugador.length; index++) {
     if (ataqueJugador[index] === ataqueEnemigo[index]) {
       indexAmbosOponentes(index, index)
@@ -443,7 +454,7 @@ function crearMensaje(resultado) {
   let nuevoAtaqueDelEnemigo = document.createElement("p")
 
   //AGREGAMOS LA INFORMACIÓN AL ELEMENTO CREADO
-  seccionMensajes.innerHTML = resultado  //******************************** */
+  // seccionMensajes.innerHTML = resultado    //********* */
   nuevoAtaqueDelJugador.innerHTML = indexAtaqueJugador
   nuevoAtaqueDelEnemigo.innerHTML = indexAtaqueEnemigo
 
@@ -456,7 +467,7 @@ function crearMensaje(resultado) {
 
 //MENSAJE RESULTADO DE TODAS LAS BATALLA
 function crearMensajeFinal(resultadoFinal) {
-  seccionMensajeFinal.innerHTML = resultadoFinal           //*************************************** */
+  seccionMensajeFinal.innerHTML = resultadoFinal    
   //PARA MOSTRAR SECCION REINICIAR AL TERMINARSE LAS VIDAS
   seccionReiniciar.style.display = "flex"
   //MOSTRAR EL RESULTADO FINAL DE LAS BATALLAS AL TERMINARSE LAS VIDAS
@@ -493,15 +504,6 @@ function pintarCanvas() {
     mokepon.pintarMokepon()
     revisarColision(mokepon)
   })
-  
-
-  // lienzo.drawImage(
-  //   mascotaJugadorObjeto.mapaFoto,
-  //   mascotaJugadorObjeto.x, //posicion X
-  //   mascotaJugadorObjeto.y, //posicion Y
-  //   mascotaJugadorObjeto.ancho, //ancho en px
-  //   mascotaJugadorObjeto.alto //alto en px
-  // )
 }
 
 //ENVIAR POSICION JUGADOR agregamos una funcion que permite leer las coordenadas del jugador
@@ -540,6 +542,7 @@ function enviarPosicion(x, y) {
               } else {
                 mokeponEnemigo = new Mokepon("Pandarol", "./assets/img/pandarol.png", 5, "./assets/img/pandarol.png", enemigo.id)
             }     
+            //lee las coordenadas del enemigo
             mokeponEnemigo.x = enemigo.x
             mokeponEnemigo.y = enemigo.y
 
@@ -551,27 +554,27 @@ function enviarPosicion(x, y) {
 }
 
 function moverDerecha() {
-  const mascotaJugadorObjeto = obtenerObjetoMascota()
+  // const mascotaJugadorObjeto = obtenerObjetoMascota()
   mascotaJugadorObjeto.velocidadX = 5
 }
 
 function moverIzquierda() {
-  const mascotaJugadorObjeto = obtenerObjetoMascota()
+  // const mascotaJugadorObjeto = obtenerObjetoMascota()
   mascotaJugadorObjeto.velocidadX = -5
 }
 
 function moverArriba() {
-  const mascotaJugadorObjeto = obtenerObjetoMascota()
+  // const mascotaJugadorObjeto = obtenerObjetoMascota()
   mascotaJugadorObjeto.velocidadY = -5
 }
 
 function moverAbajo() {
-  const mascotaJugadorObjeto = obtenerObjetoMascota()
+  // const mascotaJugadorObjeto = obtenerObjetoMascota()
   mascotaJugadorObjeto.velocidadY = 5
 }
 
 function detenerMovimiento() {
-  const mascotaJugadorObjeto = obtenerObjetoMascota()
+  // const mascotaJugadorObjeto = obtenerObjetoMascota()
   mascotaJugadorObjeto.velocidadX = 0
   mascotaJugadorObjeto.velocidadY = 0
 }
@@ -581,19 +584,15 @@ function presionarTecla(event) {
     case "ArrowUp":
       moverArriba()
       break
-
     case "ArrowDown":
       moverAbajo()
       break
-
     case "ArrowLeft":
       moverIzquierda()
       break
-
     case "ArrowRight":
       moverDerecha()
       break
-
     default:
       break
   }
@@ -636,10 +635,10 @@ function revisarColision(enemigo) {
   detenerMovimiento()
   clearInterval(intervalo)
 
-  // console.log("se detectó un choque")
-  seccionVerMapa.style.display = "none"
+  enemigoId = enemigo.id
   seccionSeleccionarAtaque.style.display = "flex"
   seleccionarMascotaEnemigo(enemigo)
+  seccionVerMapa.style.display = "none"
 }
 
 //Esta línea le manda esperar a que cargue toda la página web para ejecutar la lógica JS
